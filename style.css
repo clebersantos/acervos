@@ -1,0 +1,169 @@
+/*
+Theme Name: Acervos Tainacan
+Theme URI: http://acervos.culturadigital.break-after: 
+Author: Cleber Santos
+Author URI: https://github.com/clebersantos
+Description: Acervos é um tema para a plataforma de Acervos Digitais da Cultura Brasileira que utiliza o Tainacan
+Template: alizee
+Version: 1.0	
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: acervos
+Domain Path: /languages/
+Tags: light, two-columns, three-columns, four-columns, right-sidebar, fluid-layout, responsive-layout, custom-colors, custom-background, custom-header, custom-menu, featured-images, sticky-post, theme-options, threaded-comments, translation-ready
+*/
+
+.site-content {
+	overflow: visible !important;
+}
+
+
+.home-sections {
+	background-color: #FAF4F4;
+}
+
+.home .slide-sidebar {
+	margin-top: -100px;
+}
+
+.artigos,
+.highlights {
+	display: inline-block;
+	padding-bottom: 15px;
+	margin-top: -100px;
+	margin-bottom: 100px;
+
+}
+
+.highlights article {
+	margin-bottom: 15px;
+	display: block;
+	padding: 10px;
+}
+
+
+.highlights article .entry-thumb {
+	margin: 0px;
+	padding: 0px;
+	width: 350px;
+	display: inline-block;
+}
+
+.highlights article header.entry-header {
+	width: 345px;
+	float: right;
+}
+
+.highlights article header.entry-header div {
+	display: inline-block;
+}
+
+.highlights .highlights-small  {
+	width: 360px;
+	display: inline-block;
+	float: left;
+}
+
+.highlights .highlights-small article .entry-thumb {
+	width: 150px;
+	margin-right: 10px;
+}
+
+.highlights .highlights-small article  header.entry-header {
+	width: 180px;
+}
+
+.highlights .highlights-small article header.entry-header .entry-title,
+.highlights .highlights-small article header.entry-header .entry-title a {
+	font-size: 18px;
+	padding-top: 5px;
+}
+
+.highlights .highlight-collection {
+	margin: 0px;
+	padding: 0px;
+	width: 355px;
+	float: right;
+}
+
+.highlights .highlight-collection .section-title {
+	margin: 0px 0px 5px 0px;
+}
+
+.highlights .highlight-collection article .entry-thumb {
+	width: 335px;
+	height: 200px;
+	overflow: hidden;
+}
+
+.highlights .highlight-collection article header.entry-header {
+	width: 170px;
+	float: none;
+}
+
+.highlights article.item-4 header.entry-header .entry-title,
+.highlights article.item-4 header.entry-header .entry-title a {
+	font-size: 20px;
+	padding-top: 10px;
+}
+
+.highlights .card {
+	background-color: #FAF4F4;
+    box-shadow: -1px 0 2px 0 rgba(0,0,0,0.12) , 1px 0 2px 0 rgba(0,0,0,0.12) , 0 1px 1px 0 rgba(0,0,0,0.24);
+	-webkit-transition: all .15s cubic-bezier(.33,.66,.66,1);
+    transition: all .15s cubic-bezier(.33,.66,.66,1);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+.highlights .card:hover {
+	box-shadow: -2px 0 2px 0 rgba(0,0,0,0.16) , 2px 0 2px 0 rgba(0,0,0,0.16) , 0 2px 2px 0 rgba(0,0,0,0.23);
+    -webkit-transform: translate3d(0,-3px,0);
+    transform: translate3d(0,-3px,0);
+}
+
+.artigos {
+	background-color: #FAF4F4;
+	box-shadow: -1px 0 2px 0 rgba(0,0,0,0.12) , 1px 0 2px 0 rgba(0,0,0,0.12) , 0 1px 1px 0 rgba(0,0,0,0.24);
+	padding: 10px;
+}
+
+.artigos .section-title {
+	font-size: 22px;
+	padding-top: 5px;
+	margin: 0px;
+}
+
+.artigos .entry-title, 
+.artigos .entry-title a {
+	font-size: 20px;
+	padding-top: 0px;
+}
+
+.artigos article {
+	clear: both;
+	content: "";
+	display: block;
+	padding: 16px 5px;
+	border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+.artigos article:last-child {
+	border: none;
+	/*padding-bottom: 0px;*/
+}
+
+.artigos article .entry-thumb {
+	width: 130px;
+	margin: 0px;
+	padding: 0px;
+	display: inline-block;
+}
+
+.artigos article header.entry-header {
+	width: 200px;
+	float: right;
+}
