@@ -168,10 +168,54 @@ get_header(); ?>
 
 			<div class="clearfix"></div>
 
-			<section class="collections"></section>
+			<section class="collections your-class">
+				
+
+				<?php 
+
+				$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection';
+				$api_response = wp_remote_get( $api_request );
+				$api_data = json_decode( wp_remote_retrieve_body( $api_response ), true );
+				
+
+				$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection';
+				$api_response = wp_remote_get( $api_request );
+				$api_data2 = json_decode( wp_remote_retrieve_body( $api_response ), true );
+				
+				//var_dump($api_data);
+				// $url = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection';
+				// $requestMethod = 'GET';
+
+				$api_data = array_merge($api_data, $api_data2)
+				?>
+
+				<?php foreach ($api_data as $id => $post) :  ?>
+					<?php //var_dump($post['featured_image']); ?>
+					<article class="hentry col-md-3">
+						<div class="entry-thumb">
+							<a href=""><img src="<?php echo $post['featured_image']['source']; ?>"></a>
+						</div>
+						
+						<header class="entry-header">
+							
+							<h3 class="entry-title"><a href="<?php echo $post['link']; ?>" target='_blank'><?php echo $post['title']; ?></h3></a>
+							
+							<div class="entry-meta">
+								2 horas						
+							</div><!-- .entry-meta -->
+							<div class="entry-content">
+								<?php echo $post['content'];  ?>
+							</div>
+						</header><!-- .entry-header -->
+					</article>
+
+				<?php endforeach; ?>
+				
+				<!-- http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection -->
+			</section>
+				<div class="clearfix"></div>
 			<section class="videos"></section>
 			<section class="images"></section>
-
 		</div>
 
 		<?php if ( have_posts() ) : ?>

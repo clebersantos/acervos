@@ -19,7 +19,7 @@ Tags: light, two-columns, three-columns, four-columns, right-sidebar, fluid-layo
 
 
 .home-sections {
-	background-color: #FAF4F4;
+	/*background-color: #FAF4F4;*/
 }
 
 .home .slide-sidebar {
@@ -107,6 +107,7 @@ Tags: light, two-columns, three-columns, four-columns, right-sidebar, fluid-layo
 	padding-top: 10px;
 }
 
+.collections .card,
 .highlights .card {
 	background-color: #FAF4F4;
     box-shadow: -1px 0 2px 0 rgba(0,0,0,0.12) , 1px 0 2px 0 rgba(0,0,0,0.12) , 0 1px 1px 0 rgba(0,0,0,0.24);
@@ -119,6 +120,7 @@ Tags: light, two-columns, three-columns, four-columns, right-sidebar, fluid-layo
     transform: translateZ(0);
 }
 
+.collections .card:hover,
 .highlights .card:hover {
 	box-shadow: -2px 0 2px 0 rgba(0,0,0,0.16) , 2px 0 2px 0 rgba(0,0,0,0.16) , 0 2px 2px 0 rgba(0,0,0,0.23);
     -webkit-transform: translate3d(0,-3px,0);
