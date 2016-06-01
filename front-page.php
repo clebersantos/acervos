@@ -168,53 +168,93 @@ get_header(); ?>
 
 			<div class="clearfix"></div>
 
-			<section class="collections your-class">
+			<section class="collections">
 				
-
+				<h3 class="section-title">Colleções</h3>
+				
 				<?php 
 
-				$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection';
+				$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection&filter[s]=afro&filter[orderby]=date&filter[order]=DESC';
 				$api_response = wp_remote_get( $api_request );
 				$api_data = json_decode( wp_remote_retrieve_body( $api_response ), true );
-				
-
-				$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection';
-				$api_response = wp_remote_get( $api_request );
-				$api_data2 = json_decode( wp_remote_retrieve_body( $api_response ), true );
-				
-				//var_dump($api_data);
-				// $url = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection';
-				// $requestMethod = 'GET';
-
-				$api_data = array_merge($api_data, $api_data2)
+			
 				?>
 
-				<?php foreach ($api_data as $id => $post) :  ?>
-					<?php //var_dump($post['featured_image']); ?>
-					<article class="hentry col-md-3">
-						<div class="entry-thumb">
-							<a href=""><img src="<?php echo $post['featured_image']['source']; ?>"></a>
-						</div>
-						
-						<header class="entry-header">
-							
-							<h3 class="entry-title"><a href="<?php echo $post['link']; ?>" target='_blank'><?php echo $post['title']; ?></h3></a>
-							
-							<div class="entry-meta">
-								2 horas						
-							</div><!-- .entry-meta -->
-							<div class="entry-content">
-								<?php echo $post['content'];  ?>
-							</div>
-						</header><!-- .entry-header -->
-					</article>
+				<div class="collections-slide">
+					<?php foreach ($api_data as $id => $post) :  ?>
+						<?php //var_dump($post['featured_image']); ?>
+						<article class="hentry">						
+							<?php if( !empty($post['featured_image']['source']) ) : ?>
+								<div class="entry-thumb">
+									<a href="<?php echo $post['link']; ?>" target="_blank">
 
-				<?php endforeach; ?>
+										<div class="thumb-icon"><i class="fa fa-link"></i></div>
+									
+										<img src="<?php echo $post['featured_image']['source']; ?>">
+									</a>
+								</div>
+							<?php endif; ?>
+							<div class="post-content no-thumb">
+								<header class="entry-header">
+									<h3 class="entry-title"><a href="<?php echo $post['link']; ?>" target='_blank'><?php echo $post['title']; ?></h3></a>
+									
+									<div class="entry-meta">
+										<?php echo themeblvd_time_ago(strtotime($post['date'])); ?>	
+									</div><!-- .entry-meta -->
+									<div class="entry-content">
+										<?php// echo $post['content'];  ?>
+									</div>
+								</header><!-- .entry-header -->
+							</div>
+						</article>
+					<?php endforeach; ?>
+				</div>
 				
 				<!-- http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection -->
 			</section>
-				<div class="clearfix"></div>
-			<section class="videos"></section>
+			<div class="clearfix"></div>
+			
+			<section class="videos">
+				<h3 class="section-title">Colleções</h3>
+				
+				<?php 
+
+				$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection&filter[s]=afro&filter[orderby]=date&filter[order]=DESC';
+				$api_response = wp_remote_get( $api_request );
+				$api_data = json_decode( wp_remote_retrieve_body( $api_response ), true );
+			
+				?>
+
+				<div class="collections-videos">
+					<?php foreach ($api_data as $id => $post) :  ?>
+						<?php //var_dump($post['featured_image']); ?>
+						<article class="hentry">						
+							<?php if( !empty($post['featured_image']['source']) ) : ?>
+								<div class="entry-thumb">
+									<a href="<?php echo $post['link']; ?>" target="_blank">
+
+										<div class="thumb-icon"><i class="fa fa-link"></i></div>
+									
+										<img src="<?php echo $post['featured_image']['source']; ?>">
+									</a>
+								</div>
+							<?php endif; ?>
+							<div class="post-content no-thumb">
+								<header class="entry-header">
+									<h3 class="entry-title"><a href="<?php echo $post['link']; ?>" target='_blank'><?php echo $post['title']; ?></h3></a>
+									
+									<div class="entry-meta">
+										<?php echo themeblvd_time_ago(strtotime($post['date'])); ?>	
+									</div><!-- .entry-meta -->
+									<div class="entry-content">
+										<?php// echo $post['content'];  ?>
+									</div>
+								</header><!-- .entry-header -->
+							</div>
+						</article>
+					<?php endforeach; ?>		
+
+			</section>
 			<section class="images"></section>
 		</div>
 
