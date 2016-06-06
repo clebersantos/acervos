@@ -12,7 +12,9 @@ function child_enqueue_styles() {
     wp_enqueue_style( 'child-style', CHILD_DIRECTORY . '/style.css' );
      //wp_enqueue_style( 'child-style',get_stylesheet_directory_uri() . '/custom.css', array( $parent_style ));
 
-    wp_enqueue_script('slick', get_stylesheet_directory_uri() . '/js/slick.min.js', array('jquery'), true );
+    wp_enqueue_style( 'alizee-font-awesome', CHILD_DIRECTORY. '/fonts/font-awesome.min.css' );
+
+    // wp_enqueue_script('slick', get_stylesheet_directory_uri() . '/js/slick.min.js', array('jquery'), true );
     wp_enqueue_script('child-script', get_stylesheet_directory_uri() . '/js/script.js', array('jquery'), true );
 
     // wp_enqueue_script( 'alizee-imagesloaded', get_template_directory_uri() . '/js/imagesloaded.pkgd.min.js', array('jquery'), true );
@@ -83,7 +85,7 @@ function themeblvd_time_ago($date) {
 		$output = '0 ' . __( 'seconds', 'themeblvd' );
 	}
  
-	$output .= __(' ago', 'themeblvd');
+	$output .= __(' atrás', 'themeblvd');
  
 	return $output;
 }

@@ -87,281 +87,298 @@ if (isset($_GET['info_messages'])) {
 
 <!-- end header -->
 
-	<div id="primary" class="content-area col-md-12">
-		<main id="main" class="site-main" role="main">
+	<div id="primary" class="content-area ">
+		<main id="main" class="site-main container" role="main">
 
-		<div class="home home-sections">
-			<section class="highlights col-md-8">
+			<div class="home home-sections">
+				<section class="highlights how col-md-8">
 
-				<div class="highlight-main">
-					<article class="card item-1">
-						<div class="entry-thumb">
-							<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan.png"></a>
-						</div>
-						<header class="entry-header">
-							<div class="entry-category">
-								acervos						
-							</div><!-- .entry-category -->
-							
-							<h1 class="entry-title"><a href="">Tainacan: solução de interoperabilidade para acervos chega ao Rio</a></h1>
-							
-							<div class="entry-meta">
-								2 horas						
-							</div><!-- .entry-meta -->
-						
-						</header><!-- .entry-header -->
-
-					</article>
-				</div>
-
-				<div class="highlights-small">
-					<article class="card item-2">
-						<div class="entry-thumb">
-							<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan.png"></a>
-						</div>
-
-						<header class="entry-header">
-							<div class="entry-category">
-								acervos						
-							</div><!-- .entry-category -->
-							
-							<h1 class="entry-title"><a href="">Tainacan: solução de interoperabilidade para acervos chega ao Rio</a></h1>
-							
-							<div class="entry-meta">
-								2 horas						
-							</div><!-- .entry-meta -->
-						
-						</header><!-- .entry-header -->
-
-					</article>
-
-					<article class="card item-3">
-
-						<div class="entry-thumb">
-							<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan.png"></a>
-						</div>
-
-						<header class="entry-header">
-							<div class="entry-category">
-								acervos						
-							</div><!-- .entry-category -->
-							
-							<h1 class="entry-title"><a href="">Tainacan: solução de interoperabilidade para acervos chega ao Rio</a></h1>
-							
-							<div class="entry-meta">
-								2 horas						
-							</div><!-- .entry-meta -->
-						
-						</header><!-- .entry-header -->
-
-					</article>
-				</div>
-
-				<div class="highlight-collection">
-					<article class="card item-4">
-						<h3 class="section-title">Coleção em Destaque</h3>
-
-						<div class="entry-thumb">
-							<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan.png"></a>
-						</div>
-						<header class="entry-header">
-							<h4 class="entry-title"><a href="">Lorem Ipsum Dolor</a></h4>
-						</header><!-- .entry-header -->
-					</article>
-				</div>
-			</section>
-
-			<section class="artigos col-md-4">
-				<h2 class="section-title">Destaques</h2>
-				<article>
-					<div class="entry-thumb">
-						<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan.png"></a>
-					</div>
-
-					<header class="entry-header">
-						
-						<h3 class="entry-title"><a href="">Lorem Ipsum Dolor</h3></a>
-						
-						<div class="entry-meta">
-							2 horas						
-						</div><!-- .entry-meta -->
-					
-					</header><!-- .entry-header -->
-
-				</article>
-
-				<article>
-					<div class="entry-thumb">
-						<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan.png"></a>
-					</div>
-					
-					<header class="entry-header">
-						
-						<h3 class="entry-title"><a href="">Lorem Ipsum Dolor</h3></a>
-						
-						<div class="entry-meta">
-							2 horas						
-						</div><!-- .entry-meta -->
-					
-					</header><!-- .entry-header -->
-				</article>
-
-				<article>
-					<div class="entry-thumb">
-						<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan.png"></a>
-					</div>
-					
-					<header class="entry-header">
-						
-						<h3 class="entry-title"><a href="">Lorem Ipsum Dolor</h3></a>
-						
-						<div class="entry-meta">
-							2 horas						
-						</div><!-- .entry-meta -->
-					
-					</header><!-- .entry-header -->
-				</article>
-
-				<article>
-					<div class="entry-thumb">
-						<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan.png"></a>
-					</div>
-					
-					<header class="entry-header">
-						
-						<h3 class="entry-title"><a href="">Lorem Ipsum Dolor</h3></a>
-						
-						<div class="entry-meta">
-							2 horas						
-						</div><!-- .entry-meta -->
-					
-					</header><!-- .entry-header -->
-				</article>
-
-			</section>
-
-			<div class="clearfix"></div>
-
-			<section class="collections">
-				
-				<h3 class="section-title">Colleções</h3>
-				
-				<?php 
-
-				$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection&filter[s]=afro&filter[orderby]=date&filter[order]=DESC';
-				$api_response = wp_remote_get( $api_request );
-				$api_data = json_decode( wp_remote_retrieve_body( $api_response ), true );
-			
-				?>
-
-				<div class="collections-slide">
-					<?php foreach ($api_data as $id => $post) :  ?>
-						<?php //var_dump($post['featured_image']); ?>
-						<article class="hentry">						
-							<?php if( !empty($post['featured_image']['source']) ) : ?>
-								<div class="entry-thumb">
-									<a href="<?php echo $post['link']; ?>" target="_blank">
-
-										<div class="thumb-icon"><i class="fa fa-link"></i></div>
-									
-										<img src="<?php echo $post['featured_image']['source']; ?>">
-									</a>
-								</div>
-							<?php endif; ?>
-							<div class="post-content no-thumb">
-								<header class="entry-header">
-									<h3 class="entry-title"><a href="<?php echo $post['link']; ?>" target='_blank'><?php echo $post['title']; ?></h3></a>
-									
-									<div class="entry-meta">
-										<?php echo themeblvd_time_ago(strtotime($post['date'])); ?>	
-									</div><!-- .entry-meta -->
-									<div class="entry-content">
-										<?php// echo $post['content'];  ?>
-									</div>
-								</header><!-- .entry-header -->
+					<div class="highlight-main">
+						<article class="card item-1">
+							<div class="entry-thumb">
+								<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/acervos.png"></a>
 							</div>
+							<header class="entry-header">
+								<div class="entry-category">
+									acervos						
+								</div><!-- .entry-category -->
+								
+								<h1 class="entry-title"><a href="">Tainacan: solução de interoperabilidade para acervos chega ao Rio</a></h1>
+								
+								<div class="entry-meta">
+									2 horas						
+								</div><!-- .entry-meta -->
+							
+							</header><!-- .entry-header -->
+
 						</article>
-					<?php endforeach; ?>
-				</div>
-				
-				<!-- http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection -->
-			</section>
-			<div class="clearfix"></div>
-			
-			<section class="videos">
-				<h3 class="section-title">Colleções</h3>
-				
-				<?php 
+					</div>
 
-				$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection&filter[s]=afro&filter[orderby]=date&filter[order]=DESC';
-				$api_response = wp_remote_get( $api_request );
-				$api_data = json_decode( wp_remote_retrieve_body( $api_response ), true );
-			
-				?>
-
-				<div class="collections-videos">
-					<?php foreach ($api_data as $id => $post) :  ?>
-						<?php //var_dump($post['featured_image']); ?>
-						<article class="hentry">						
-							<?php if( !empty($post['featured_image']['source']) ) : ?>
-								<div class="entry-thumb">
-									<a href="<?php echo $post['link']; ?>" target="_blank">
-
-										<div class="thumb-icon"><i class="fa fa-link"></i></div>
-									
-										<img src="<?php echo $post['featured_image']['source']; ?>">
-									</a>
-								</div>
-							<?php endif; ?>
-							<div class="post-content no-thumb">
-								<header class="entry-header">
-									<h3 class="entry-title"><a href="<?php echo $post['link']; ?>" target='_blank'><?php echo $post['title']; ?></h3></a>
-									
-									<div class="entry-meta">
-										<?php echo themeblvd_time_ago(strtotime($post['date'])); ?>	
-									</div><!-- .entry-meta -->
-									<div class="entry-content">
-										<?php// echo $post['content'];  ?>
-									</div>
-								</header><!-- .entry-header -->
+					<div class="highlights-small col-md-6">
+						<article class="card item-2">
+							<div class="entry-thumb">
+								<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/acervos2.jpg"></a>
 							</div>
+
+							<header class="entry-header">
+								<div class="entry-category">
+									acervos						
+								</div><!-- .entry-category -->
+								
+								<h1 class="entry-title"><a href="">Tainacan: solução de interoperabilidade para acervos chega ao Rio</a></h1>
+								
+								<div class="entry-meta">
+									2 horas						
+								</div><!-- .entry-meta -->
+							
+							</header><!-- .entry-header -->
+
 						</article>
-					<?php endforeach; ?>		
 
-			</section>
-			<section class="images"></section>
-		</div>
+						<article class="card item-3">
 
-		<?php if ( have_posts() ) : ?>
+							<div class="entry-thumb">
+								<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/acervos.png"></a>
+							</div>
 
-			<?php /* Start the Loop */ ?>
-			<?php $c = 0; ?>
-			<div class="home-layout">
+							<header class="entry-header">
+								<div class="entry-category">
+									acervos						
+								</div><!-- .entry-category -->
+								
+								<h1 class="entry-title"><a href="">Tainacan: solução de interoperabilidade para acervos chega ao Rio</a></h1>
+								
+								<div class="entry-meta">
+									2 horas						
+								</div><!-- .entry-meta -->
+							
+							</header><!-- .entry-header -->
 
-				<?php while ( have_posts() ) : the_post(); ?>
+						</article>
+					</div>
 
-					<?php
-						/* Include the Post-Format-specific template for the content.
-						 * If you want to override this in a child theme, then include a file
-						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-						 */
-						get_template_part( 'content', get_post_format() );
+					<div class="highlight-collection col-md-6">
+						<article class="card item-4">
+							<h3 class="section-title">Coleção em Destaque</h3>
+
+							<div class="entry-thumb">
+								<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/indio.jpg"></a>
+							</div>
+							<header class="entry-header">
+								<h4 class="entry-title"><a href="">Lorem Ipsum Dolor</a></h4>
+							</header><!-- .entry-header -->
+						</article>
+					</div>
+				</section>
+
+				<section class="articles col-md-4">
+					<h2 class="section-title">Destaques</h2>
+					<article>
+						<div class="entry-thumb">
+							<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan_europeana.jpg"></a>
+						</div>
+
+						<header class="entry-header">
+							
+							<h3 class="entry-title"><a href="">Lorem Ipsum Dolor</h3></a>
+							
+							<div class="entry-meta">
+								2 horas						
+							</div><!-- .entry-meta -->
+						
+						</header><!-- .entry-header -->
+
+					</article>
+
+					<article>
+						<div class="entry-thumb">
+							<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/indio.jpg"></a>
+						</div>
+						
+						<header class="entry-header">
+							
+							<h3 class="entry-title"><a href="">Lorem Ipsum Dolor</h3></a>
+							
+							<div class="entry-meta">
+								2 horas						
+							</div><!-- .entry-meta -->
+						
+						</header><!-- .entry-header -->
+					</article>
+
+					<article>
+						<div class="entry-thumb">
+							<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan_ufg.jpg"></a>
+						</div>
+						
+						<header class="entry-header">
+							
+							<h3 class="entry-title"><a href="">Lorem Ipsum Dolor</h3></a>
+							
+							<div class="entry-meta">
+								2 horas						
+							</div><!-- .entry-meta -->
+						
+						</header><!-- .entry-header -->
+					</article>
+
+					<article>
+						<div class="entry-thumb">
+							<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan.png"></a>
+						</div>
+						
+						<header class="entry-header">
+							
+							<h3 class="entry-title"><a href="">Lorem Ipsum Dolor</h3></a>
+							
+							<div class="entry-meta">
+								2 horas						
+							</div><!-- .entry-meta -->
+						
+						</header><!-- .entry-header -->
+					</article>
+
+				</section>
+
+				<div class="clearfix"></div>
+
+				<section class="collections">
+					
+					<h3 class="section-title">Colleções em destaque</h3>
+					
+					<?php 
+
+					$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection&filter[s]=afro&filter[orderby]=date&filter[order]=DESC';
+					$api_response = wp_remote_get( $api_request );
+					$api_data = json_decode( wp_remote_retrieve_body( $api_response ), true );
+				
 					?>
+
+					<div class="collections-slide">
+						<?php foreach ($api_data as $id => $post) :  ?>
+							<?php //var_dump($post['featured_image']); ?>
+
+							<article class="hentry">
+
+								<div class="temp-image" style="padding-bottom: 56.25%;"></div>
+								
+								<div class="final-content">
+									
+									<a href="<?php echo $post['link']; ?>" target="_blank">
+										
+										<?php if( !empty($post['featured_image']['source']) ) : ?>
+											<div class="entry-thumb">
+										
+												<div class="thumb-icon"><i class="fa fa-link"></i></div>
+												<img class="thumb" src="<?php echo $post['featured_image']['source']; ?>">
+
+											</div>
+											
+											<div class="collection__darkener"></div>
+											<div class="collection__gradient"></div>
+											<div class="thumb-icon"><i class="fa fa-link"></i></div>
+										<?php endif; ?>
+										
+										<div class="post-content no-thumb">
+											<header class="entry-header">
+												<h3 class="entry-title"><?php echo $post['title']; ?></h3>
+												
+												<div class="entry-meta">
+													<?php echo themeblvd_time_ago(strtotime($post['date'])); ?>	
+												</div><!-- .entry-meta -->
+												<!-- <div class="entry-content">
+													<?php// echo $post['content'];  ?>
+												</div> -->
+											</header><!-- .entry-header -->
+										</div>
+									</a>
+								</div>								
+							</article>
+						<?php endforeach; ?>
+					</div>
 					
-				<?php $c++; ?>	
-				<?php endwhile; ?>
+					<!-- http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection -->
+				</section>
+				<div class="clearfix"></div>
+				
+				<section class="videos">
+					<h3 class="section-title">Vídeos</h3>
+					
+					<?php 
+
+					$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection&filter[s]=afro&filter[orderby]=date&filter[order]=DESC';
+					$api_response = wp_remote_get( $api_request );
+					$api_data = json_decode( wp_remote_retrieve_body( $api_response ), true );
+				
+					?>
+
+					<div class="collections-videos">
+						<?php foreach ($api_data as $id => $post) :  ?>
+							<?php //var_dump($post['featured_image']); ?>
+
+							<article class="hentry">						
+								<?php if( !empty($post['featured_image']['source']) ) : ?>
+									<div class="entry-thumb">
+										<a href="<?php echo $post['link']; ?>" target="_blank">
+
+											<div class="thumb-icon"><i class="fa fa-link"></i></div>
+										
+											<img src="<?php echo $post['featured_image']['source']; ?>">
+										</a>
+									</div>
+								<?php endif; ?>
+
+								<div class="post-content no-thumb">
+									<header class="entry-header">
+										<h3 class="entry-title"><a href="<?php echo $post['link']; ?>" target='_blank'><?php echo $post['title']; ?></h3></a>
+										
+										<div class="entry-meta">
+											<?php echo themeblvd_time_ago(strtotime($post['date'])); ?>	
+										</div><!-- .entry-meta -->
+										<div class="entry-content">
+											<?php// echo $post['content'];  ?>
+										</div>
+									</header><!-- .entry-header -->
+								</div>
+							</article>
+						<?php endforeach; ?>		
+
+				</section>
+				<section class="images"></section>
 			</div>
 
-			<?php alizee_paging_nav(); ?>
+			<?php if ( have_posts() ) : ?>
 
-		<?php else : ?>
+				<?php /* Start the Loop */ ?>
+				<?php $c = 0; ?>
+				<div class="home-layout">
 
-			<?php get_template_part( 'content', 'none' ); ?>
+					<?php while ( have_posts() ) : the_post(); ?>
 
-		<?php endif; ?>
+						<?php
+							/* Include the Post-Format-specific template for the content.
+							 * If you want to override this in a child theme, then include a file
+							 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+							 */
+							get_template_part( 'content', get_post_format() );
+						?>
+						
+					<?php $c++; ?>	
+					<?php endwhile; ?>
+				</div>
+
+				<?php alizee_paging_nav(); ?>
+
+			<?php else : ?>
+
+				<?php get_template_part( 'content', 'none' ); ?>
+
+			<?php endif; ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
+
+<canvas id="canvastron" height="500" width="1575" style="width: 1575px; cursor: default;"></canvas>
