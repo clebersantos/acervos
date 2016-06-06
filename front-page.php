@@ -248,7 +248,10 @@ if (isset($_GET['info_messages'])) {
 					
 					<?php 
 
-					$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection&filter[s]=afro&filter[orderby]=date&filter[order]=DESC';
+					// $api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection&filter[s]=afro&filter[orderby]=rand&filter[order]=DESC';
+
+					$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection&filter[s]=a&filter[orderby]=rand&filter[order]=DESC';
+
 					$api_response = wp_remote_get( $api_request );
 					$api_data = json_decode( wp_remote_retrieve_body( $api_response ), true );
 				
@@ -260,7 +263,7 @@ if (isset($_GET['info_messages'])) {
 
 							<article class="hentry">
 
-								<div class="temp-image" style="padding-bottom: 56.25%;"></div>
+								<div class="temp-image" style="padding-bottom: 83.25%;"></div>
 								
 								<div class="final-content">
 									

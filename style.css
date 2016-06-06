@@ -1555,7 +1555,7 @@ section.collections .section-title {
 	display: block;
     width: 100%;
     height: auto;
-    /*display: none;*/
+    background-color: #000;
 }
 
 .slick-slide .final-content {
