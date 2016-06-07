@@ -1440,6 +1440,21 @@ section.collections .section-title {
 }
 
 
+section.videos article {
+	height: 400px;
+}
+
+section.videos .entry-thumb {
+	height: 200px;
+}
+
+section.videos .entry-thumb img {
+	height: 100%;
+}
+
+
+
+
 /* Slider */
 .slick-slider
 {
@@ -1661,9 +1676,17 @@ article.hentry:hover .collection__darkener{
 .slick-next,
 .slick-prev {
 	position: absolute;
-	top: 110px;
+	top: 50%;
 	z-index: 1;
+	margin-top: -50px;
 }
 
-.slick-prev { left: 0px; }
+.slick-next:before,
+.slick-prev:before {
+	font-size: 100px;
+	color: #000;
+	background-color: transparent;
+}
+	
+.slick-prev { left: -80px; }
 .slick-next { right: 0px; }

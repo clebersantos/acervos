@@ -315,11 +315,11 @@ if (isset($_GET['info_messages'])) {
 				
 					?>
 
-					<div class="collections-videos">
+					<div class="collections-videos row">
 						<?php foreach ($api_data as $id => $post) :  ?>
 							<?php //var_dump($post['featured_image']); ?>
 
-							<article class="hentry">						
+							<article class="hentry col-md-3">						
 								<?php if( !empty($post['featured_image']['source']) ) : ?>
 									<div class="entry-thumb">
 										<a href="<?php echo $post['link']; ?>" target="_blank">
