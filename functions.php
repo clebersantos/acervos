@@ -20,15 +20,53 @@ function child_enqueue_styles() {
     // wp_enqueue_script( 'alizee-imagesloaded', get_template_directory_uri() . '/js/imagesloaded.pkgd.min.js', array('jquery'), true );
 }
 
+add_image_size( 'sidebar', 280, 126, true );
 
-function themeblvd_time_ago($date) {
+/**
+ * Sidebar structure
+ *
+ * @param string 
+ * @return void
+ */
+function register_theme_sidebar( $id, $name )
+{
+	register_sidebar( array(
+		'id'          => $id,
+		'name'          => $name,
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_head'   => '<div class="widget-head">',
+		'after_head'    => '</div>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+		'before_body'   => '<div class="widget-body">',
+		'after_body'    => '</div>',
+		'before_foot'   => '<div class="widget-foot">',
+		'after_foot'    => '</div>',
+	) );
+}
+
+/**
+* Register sidebars
+*
+* @param void
+* @return void
+*/
+if(function_exists('register_sidebar'))
+{	
+	register_theme_sidebar('sidebar-1','home-destaques');
+
+}
+
+
+function acervos_time_ago($date) {
  
 	global $post;
  
 	$date = $date; //get_post_time('G', true, $post);
  
 	/**
-	 * Where you see 'themeblvd' below, you'd
+	 * Where you see 'acervos' below, you'd
 	 * want to replace those with whatever term
 	 * you're using in your theme to provide
 	 * support for localization.
@@ -36,13 +74,13 @@ function themeblvd_time_ago($date) {
  
 	// Array of time period chunks
 	$chunks = array(
-		array( 60 * 60 * 24 * 365 , __( 'ano', 'themeblvd' ), __( 'anos', 'themeblvd' ) ),
-		array( 60 * 60 * 24 * 30 , __( 'mês', 'themeblvd' ), __( 'meses', 'themeblvd' ) ),
-		array( 60 * 60 * 24 * 7, __( 'semana', 'themeblvd' ), __( 'semanas', 'themeblvd' ) ),
-		array( 60 * 60 * 24 , __( 'dia', 'themeblvd' ), __( 'dias', 'themeblvd' ) ),
-		array( 60 * 60 , __( 'hora', 'themeblvd' ), __( 'horas', 'themeblvd' ) ),
-		array( 60 , __( 'minutos', 'themeblvd' ), __( 'minutos', 'themeblvd' ) ),
-		array( 1, __( 'segundo', 'themeblvd' ), __( 'segundos', 'themeblvd' ) )
+		array( 60 * 60 * 24 * 365 , __( 'ano', 'acervos' ), __( 'anos', 'acervos' ) ),
+		array( 60 * 60 * 24 * 30 , __( 'mês', 'acervos' ), __( 'meses', 'acervos' ) ),
+		array( 60 * 60 * 24 * 7, __( 'semana', 'acervos' ), __( 'semanas', 'acervos' ) ),
+		array( 60 * 60 * 24 , __( 'dia', 'acervos' ), __( 'dias', 'acervos' ) ),
+		array( 60 * 60 , __( 'hora', 'acervos' ), __( 'horas', 'acervos' ) ),
+		array( 60 , __( 'minutos', 'acervos' ), __( 'minutos', 'acervos' ) ),
+		array( 1, __( 'segundo', 'acervos' ), __( 'segundos', 'acervos' ) )
 	);
  
 	if ( !is_numeric( $date ) ) {
@@ -59,7 +97,7 @@ function themeblvd_time_ago($date) {
  
 	// Something went wrong with date calculation and we ended up with a negative date.
 	if ( 0 > $since )
-		return __( 'sometime', 'themeblvd' );
+		return __( 'sometime', 'acervos' );
  
 	/**
 	 * We only want to output one chunks of time here, eg:
@@ -82,13 +120,53 @@ function themeblvd_time_ago($date) {
  
  
 	if ( !(int)trim($output) ){
-		$output = '0 ' . __( 'seconds', 'themeblvd' );
+		$output = '0 ' . __( 'seconds', 'acervos' );
 	}
  
-	$output .= __(' atrás', 'themeblvd');
+	$output .= __(' atrás', 'acervos');
  
 	return $output;
 }
  
-// Filter our themeblvd_time_ago() function into WP's the_time() function
-add_filter('the_time', 'themeblvd_time_ago');
+// Filter our acervos_time_ago() function into WP's the_time() function
+add_filter('the_time', 'acervos_time_ago');
+
+
+function filter_highlight_content_widget( $content, $highlight, $entry ) {
+	
+	$class_separator = "";
+	$entry["date"] 	 = acervos_time_ago($entry["date"]);
+	$i 				 = $entry["interator"];
+	$c 				 = "";
+
+	if( $i == 1)
+		$class_separator = "highlight-main";
+	elseif( $i==2 )
+		$class_separator = "highlights-small col-md-6";
+
+	if( $i!=3)
+		$c = "<div class='{$class_separator}'>";
+	
+	$c .= "<article id='post-{$entry["ID"]}' class='card {$class_excerpt} item-{$i}'>";
+	$c .=	"<div class='entry-thumb'>";
+	$c .=		"<a href={$entry["permalink"]} title='{$highlight["highlight_title"]}'>{$entry["thumbnail"]}</a>";
+	$c .=	"</div>";
+	$c .=	"<header class='entry-header'>";	
+	$c .=		"<div class='entry-meta'>{$entry["categories"]}</div>";
+	$c .=		"<h1 class='entry-title'>";
+	$c .=			"<a href={$entry["permalink"]}' title='{$highlight["highlight_title"]}'>{$entry["title"]}</a>";
+	$c .= 		"</h1>";
+	$c .=		"<div class='entry-meta'>{$entry["date"]}</div>";
+	// $c .=		"<div class='entry-excerpt'>{$entry["excerpt"]}</div>";
+	$c .=	"</header>";
+	$c .= "</article>";
+	
+	if( $i != 2 )
+		$c .= "</div>";
+
+	return $c;
+}
+add_filter('highlight_content_widget', 'filter_highlight_content_widget', 10, 3);
+
+add_filter('highlight_before_widget', function() { return ''; });
+add_filter('highlight_after_widget', function() { return ''; });
