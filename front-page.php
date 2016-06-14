@@ -87,7 +87,7 @@ if (isset($_GET['info_messages'])) {
 
 <!-- end header -->
 
-	<div id="primary" class="content-area ">
+	<div id="primary" class="content-area">
 		<main id="main" class="site-main container" role="main">
 
 			
@@ -97,75 +97,46 @@ if (isset($_GET['info_messages'])) {
 				
 					<?php  dynamic_sidebar('home-destaques'); ?>
 
-					
 				</section>
 
 				<section class="articles col-md-4">
 					<h2 class="section-title">Destaques</h2>
-					<article>
-						<div class="entry-thumb">
-							<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan_europeana.jpg"></a>
-						</div>
 
-						<header class="entry-header">
-							
-							<h3 class="entry-title"><a href="">Lorem Ipsum Dolor</h3></a>
-							
-							<div class="entry-meta">
-								2 horas						
-							</div><!-- .entry-meta -->
-						
-						</header><!-- .entry-header -->
+					<?php $destaques = new WP_Query( array( 'category_name' => 'destaques' )  ); ?>
 
-					</article>
+					<?php if ( $destaques->have_posts() ) : ?>
 
-					<article>
-						<div class="entry-thumb">
-							<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/indio.jpg"></a>
-						</div>
-						
-						<header class="entry-header">
-							
-							<h3 class="entry-title"><a href="">Lorem Ipsum Dolor</h3></a>
-							
-							<div class="entry-meta">
-								2 horas						
-							</div><!-- .entry-meta -->
-						
-						</header><!-- .entry-header -->
-					</article>
+						<?php while ( $destaques->have_posts() ) : $destaques->the_post();  ?>
+							<article>
+								<div class="entry-thumb">
+									<a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail(); ?></a>
+								</div>
 
-					<article>
-						<div class="entry-thumb">
-							<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan_ufg.jpg"></a>
-						</div>
-						
-						<header class="entry-header">
-							
-							<h3 class="entry-title"><a href="">Lorem Ipsum Dolor</h3></a>
-							
-							<div class="entry-meta">
-								2 horas						
-							</div><!-- .entry-meta -->
-						
-						</header><!-- .entry-header -->
-					</article>
+								<header class="entry-header">
+									
+									<h3 class="entry-title"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></h3></a>
+									
+									<div class="entry-meta">
+										<?php echo acervos_time_ago(get_post_time('G', true)); ?>				
+									</div><!-- .entry-meta -->
+								
+								</header><!-- .entry-header -->
 
-					<article>
-						<div class="entry-thumb">
-							<a href=""><img src="<?php echo CHILD_DIRECTORY; ?>/images/temp/tainacan.png"></a>
-						</div>
+							</article>
 						
-						<header class="entry-header">
-							
-							<h3 class="entry-title"><a href="">Lorem Ipsum Dolor</h3></a>
-							
-							<div class="entry-meta">
-								2 horas						
-							</div><!-- .entry-meta -->
-						
-						</header><!-- .entry-header -->
-					</article>
+						<?php endwhile; ?>
+
+					<?php endif; ?>
+
+					<?php 
+						/* Restore original Post Data 
+						 * NB: Because we are using new WP_Query we aren't stomping on the 
+						 * original $wp_query and it does not need to be reset with 
+						 * wp_reset_query(). We just need to set the post data back up with
+						 * wp_reset_postdata().
+						 */
+						wp_reset_postdata();
+					?>
 
 				</section>
 
@@ -216,7 +187,7 @@ if (isset($_GET['info_messages'])) {
 												<h3 class="entry-title"><?php echo $post['title']; ?></h3>
 												
 												<div class="entry-meta">
-													<?php echo themeblvd_time_ago(strtotime($post['date'])); ?>	
+													<?php echo acervos_time_ago(strtotime($post['date'])); ?>	
 												</div><!-- .entry-meta -->
 												<!-- <div class="entry-content">
 													<?php// echo $post['content'];  ?>
@@ -265,7 +236,7 @@ if (isset($_GET['info_messages'])) {
 										<h3 class="entry-title"><a href="<?php echo $post['link']; ?>" target='_blank'><?php echo $post['title']; ?></h3></a>
 										
 										<div class="entry-meta">
-											<?php echo themeblvd_time_ago(strtotime($post['date'])); ?>	
+											<?php echo acervos_time_ago(strtotime($post['date'])); ?>	
 										</div><!-- .entry-meta -->
 										<div class="entry-content">
 											<?php// echo $post['content'];  ?>
@@ -299,7 +270,7 @@ if (isset($_GET['info_messages'])) {
 					<?php endwhile; ?>
 				</div>
 
-				<?php alizee_paging_nav(); ?>
+				<?php //alizee_paging_nav(); ?>
 
 			<?php else : ?>
 

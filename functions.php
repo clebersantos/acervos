@@ -8,11 +8,11 @@ define ('PARENT_DIRECORY', get_template_directory_uri() );
 add_action( 'wp_enqueue_scripts', 'child_enqueue_styles',99);
 function child_enqueue_styles() {
     $parent_style = 'parent-style';
-    wp_enqueue_style( $parent_style, PARENT_DIRECORY . '/style.css' );
-    wp_enqueue_style( 'child-style', CHILD_DIRECTORY . '/style.css' );
-     //wp_enqueue_style( 'child-style',get_stylesheet_directory_uri() . '/custom.css', array( $parent_style ));
 
-    wp_enqueue_style( 'alizee-font-awesome', CHILD_DIRECTORY. '/fonts/font-awesome.min.css' );
+    wp_enqueue_style( 'child-style', CHILD_DIRECTORY . '/style.css' );
+    //wp_enqueue_style( 'child-style',get_stylesheet_directory_uri() . '/custom.css', array( $parent_style ));
+
+    //wp_enqueue_style( 'acervos-font-awesome', CHILD_DIRECTORY. '/fonts/font-awesome.min.css' );
 
     // wp_enqueue_script('slick', get_stylesheet_directory_uri() . '/js/slick.min.js', array('jquery'), true );
     wp_enqueue_script('child-script', get_stylesheet_directory_uri() . '/js/script.js', array('jquery'), true );
@@ -138,30 +138,37 @@ function filter_highlight_content_widget( $content, $highlight, $entry ) {
 	$entry["date"] 	 = acervos_time_ago($entry["date"]);
 	$i 				 = $entry["interator"];
 	$c 				 = "";
+	$col 			 = "";
+
+	$class_excerpt = ( strlen( $highlight[ "highlight_excerpt" ]) <= 1 ) ? "not-excerpt" : "true-excerpt";
+	$class_thumb   = ( strlen( $entry[ "thumbnail" ]) <= 1 ) ? "not-thumb" : "has-thumb";
 
 	if( $i == 1)
-		$class_separator = "highlight-main";
-	elseif( $i==2 )
-		$class_separator = "highlights-small col-md-6";
-
-	if( $i!=3)
-		$c = "<div class='{$class_separator}'>";
+		$c = "<div class='highlight-main'>";
+	else if( $i==2 )
+		$c = "<div class='highlights-small col-md-6'>"; // se for 2 class small tanto faz quantidade
 	
-	$c .= "<article id='post-{$entry["ID"]}' class='card {$class_excerpt} item-{$i}'>";
-	$c .=	"<div class='entry-thumb'>";
+	if( $i > 3)
+		$col ="col-md-6";
+
+	$c .= "<article id='post-{$entry["ID"]}' class='card {$class_excerpt} {$class_thumb} item-{$i} {$col}'>";
+	
+	if( $class_thumb ==  'has-thumb')
+		$c .=	"<div class='entry-thumb'>";
+	
 	$c .=		"<a href={$entry["permalink"]} title='{$highlight["highlight_title"]}'>{$entry["thumbnail"]}</a>";
 	$c .=	"</div>";
 	$c .=	"<header class='entry-header'>";	
 	$c .=		"<div class='entry-meta'>{$entry["categories"]}</div>";
 	$c .=		"<h1 class='entry-title'>";
-	$c .=			"<a href={$entry["permalink"]}' title='{$highlight["highlight_title"]}'>{$entry["title"]}</a>";
+	$c .=			"<a href={$entry["permalink"]} title='{$highlight["highlight_title"]}'>{$entry["title"]}</a>";
 	$c .= 		"</h1>";
 	$c .=		"<div class='entry-meta'>{$entry["date"]}</div>";
 	// $c .=		"<div class='entry-excerpt'>{$entry["excerpt"]}</div>";
 	$c .=	"</header>";
 	$c .= "</article>";
-	
-	if( $i != 2 )
+
+	if( $i == 1 || $i == 3 )
 		$c .= "</div>";
 
 	return $c;

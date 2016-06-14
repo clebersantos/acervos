@@ -1261,15 +1261,12 @@ article img {
 
 .hentry {
     background-color: #fff;
-    /*padding: 30px;*/
-    /*margin-bottom: 60px;*/
     box-shadow: 0 0 1px #adadad;
 }
 
 .articles,
 .highlights {
 	display: inline-block;
-	/*padding-bottom: 15px;*/
 	margin-top: -30px;
 }
 
@@ -1277,14 +1274,15 @@ article img {
 	padding-left: 0px;
 }
 
+.highlights .entry-meta {
+	margin-bottom: 0px;
+}
+
+
 .highlights article {
 	margin-bottom: 15px;
 	display: block;
 	padding: 10px;
-}
-
-.highlights article.item-1 {
-	height: 250px;
 }
 
 .highlights article .entry-thumb {
@@ -1295,6 +1293,11 @@ article img {
 	margin-top: 5px;
 }
 
+.highlights .highlight-main article.item-1 {
+	height: 250px;
+}
+
+
 .highlights article header.entry-header {
 	width: 345px;
 	float: right;
@@ -1304,50 +1307,51 @@ article img {
 	display: inline-block;
 }
 
+.highlights article header.entry-header .entry-title a {
+	line-height: 29px;
+}
+
 .highlights .highlights-small  {
 	padding-left: 0px;
-	padding-right: 0px;
 }
 
 .highlights .highlights-small article {
 	height: 140px;
-	padding: 15px 10px;
+	padding: 10px;
 }
 
 .highlights .highlights-small article .entry-thumb {
-	width: 150px;
+	width: 140px;
 	margin-right: 10px;
 }
 
 .highlights .highlights-small article  header.entry-header {
-	width: 180px;
+	width: 185px;
 }
 
 .highlights .highlights-small article header.entry-header .entry-title,
 .highlights .highlights-small article header.entry-header .entry-title a {
 	font-size: 18px;
-	padding-top: 5px;
+	padding: 0px;
+	line-height: 19px;
 }
 
-.highlights .highlight-collection {
-	padding-right: 0px;
-}
-
-.highlights .highlight-collection article {
+.highlights article.item-4  {
+	padding-left: 20px;
 	height: 295px;
 }
 
-.highlights .highlight-collection .section-title {
+.highlights .item-4 .section-title {
 	margin: 0px 0px 5px 0px;
 }
 
-.highlights .highlight-collection article .entry-thumb {
+.highlights article.item-4 .entry-thumb {
 	width: 335px;
-	height: 200px;
+	height: 180px;
 	overflow: hidden;
 }
 
-.highlights .highlight-collection article header.entry-header {
+.highlights article.item-4  header.entry-header {
 	width: 170px;
 	float: none;
 }
@@ -1355,7 +1359,7 @@ article img {
 .highlights article.item-4 header.entry-header .entry-title,
 .highlights article.item-4 header.entry-header .entry-title a {
 	font-size: 20px;
-	padding-top: 6px;
+	padding: 0px;
 }
 
 .collections .card,
@@ -1679,14 +1683,34 @@ article.hentry:hover .collection__darkener{
 	top: 50%;
 	z-index: 1;
 	margin-top: -50px;
+	opacity: 0.1;
+
+	-webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .slick-next:before,
 .slick-prev:before {
+	display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+	content: "\E079";
 	font-size: 100px;
 	color: #000;
 	background-color: transparent;
 }
-	
+.slick-next:before {
+	content: "\E080";
+}	
 .slick-prev { left: -80px; }
 .slick-next { right: 0px; }
+
+.collections:hover .slick-arrow {
+	opacity: 1;
+}
