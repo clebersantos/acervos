@@ -99,46 +99,50 @@ if (isset($_GET['info_messages'])) {
 
 				</section>
 
-				<section class="articles col-md-4">
-					<h2 class="section-title">Destaques</h2>
-
-					<?php $destaques = new WP_Query( array( 'category_name' => 'destaques' )  ); ?>
+				<?php $destaques = new WP_Query( array( 'category_name' => 'destaques' )  ); ?>
 
 					<?php if ( $destaques->have_posts() ) : ?>
 
-						<?php while ( $destaques->have_posts() ) : $destaques->the_post();  ?>
-							<article>
-								<div class="entry-thumb">
-									<a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail(); ?></a>
-								</div>
+				<section class="articles col-md-4">
+					<h2 class="section-title">Destaques</h2>
 
-								<header class="entry-header">
-									
-									<h3 class="entry-title"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></h3></a>
-									
-									<div class="entry-meta">
-										<?php echo acervos_time_ago(get_post_time('G', true)); ?>				
-									</div><!-- .entry-meta -->
+				
+
+					<?php while ( $destaques->have_posts() ) : $destaques->the_post();  ?>
+						<article>
+							<div class="entry-thumb">
+								<a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail(); ?></a>
+							</div>
+
+							<header class="entry-header">
 								
-								</header><!-- .entry-header -->
+								<h3 class="entry-title"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></h3></a>
+								
+								<div class="entry-meta">
+									<?php echo acervos_time_ago(get_post_time('G', true)); ?>				
+								</div><!-- .entry-meta -->
+							
+							</header><!-- .entry-header -->
 
-							</article>
-						
-						<?php endwhile; ?>
-
-					<?php endif; ?>
-
-					<?php 
-						/* Restore original Post Data 
-						 * NB: Because we are using new WP_Query we aren't stomping on the 
-						 * original $wp_query and it does not need to be reset with 
-						 * wp_reset_query(). We just need to set the post data back up with
-						 * wp_reset_postdata().
-						 */
-						wp_reset_postdata();
-					?>
-
+						</article>
+					
+					<?php endwhile; ?>
+			
 				</section>
+
+				<?php endif; ?>
+
+				<?php 
+					/* Restore original Post Data 
+					 * NB: Because we are using new WP_Query we aren't stomping on the 
+					 * original $wp_query and it does not need to be reset with 
+					 * wp_reset_query(). We just need to set the post data back up with
+					 * wp_reset_postdata().
+					 */
+					wp_reset_postdata();
+				?>
+
+				
 
 				<div class="clearfix"></div>
 
