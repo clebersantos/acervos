@@ -8,7 +8,7 @@
 
 	<?php if ( (has_post_thumbnail()) && ( get_theme_mod( 'alizee_post_img' )) ) : ?>
 		<div class="single-thumb">
-			<?php the_post_thumbnail('alizee-thumb'); ?>
+			<?php the_post_thumbnail(); ?>
 		</div>	
 	<?php endif; ?>
 
