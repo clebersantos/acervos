@@ -1,23 +1,16 @@
 <?php 
 
-// variáveis
-
 define ('CHILD_DIRECTORY', get_stylesheet_directory_uri() );
 define ('PARENT_DIRECORY', get_template_directory_uri() );
+define ('PARENT_TEMPLATE_NAME',  basename(get_template_directory_uri()));
 
 add_action( 'wp_enqueue_scripts', 'child_enqueue_styles',99);
 function child_enqueue_styles() {
-    $parent_style = 'parent-style';
+    // $parent_style = 'parent-style';
 
     wp_enqueue_style( 'child-style', CHILD_DIRECTORY . '/style.css' );
-    //wp_enqueue_style( 'child-style',get_stylesheet_directory_uri() . '/custom.css', array( $parent_style ));
-
-    //wp_enqueue_style( 'acervos-font-awesome', CHILD_DIRECTORY. '/fonts/font-awesome.min.css' );
-
     // wp_enqueue_script('slick', get_stylesheet_directory_uri() . '/js/slick.min.js', array('jquery'), true );
     wp_enqueue_script('child-script', get_stylesheet_directory_uri() . '/js/script.js', array('jquery'), true );
-
-    // wp_enqueue_script( 'alizee-imagesloaded', get_template_directory_uri() . '/js/imagesloaded.pkgd.min.js', array('jquery'), true );
 }
 
 add_image_size( 'sidebar', 280, 126, true );
@@ -132,6 +125,8 @@ function acervos_time_ago($date) {
 add_filter('the_time', 'acervos_time_ago');
 
 
+
+/******** Filtro do plugin: cdbr_highlight_mu *************/
 function filter_highlight_content_widget( $content, $highlight, $entry ) {
 	
 	$class_separator = "";
@@ -174,6 +169,5 @@ function filter_highlight_content_widget( $content, $highlight, $entry ) {
 	return $c;
 }
 add_filter('highlight_content_widget', 'filter_highlight_content_widget', 10, 3);
-
 add_filter('highlight_before_widget', function() { return ''; });
 add_filter('highlight_after_widget', function() { return ''; });

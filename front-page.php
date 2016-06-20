@@ -16,7 +16,6 @@ $options = get_option('socialdb_theme_options');
 ?>
 
 
-
 <!-- TAINACAN: hiddeNs responsaveis em realizar acoes do repositorio -->
 <input type="hidden" id="src" name="src" value="<?php echo get_template_directory_uri() ?>">
 <input type="hidden" id="repository_main_page" name="repository_main_page" value="true">
@@ -91,6 +90,11 @@ if (isset($_GET['info_messages'])) {
 		<main id="main" class="site-main container" role="main">
 
 			
+			<!-- TAINACAN: esta div (AJAX) recebe html E esta presente tanto na index quanto no single, pois algumas views da administracao sao carregadas aqui -->
+			<div id="configuration"></div>
+			<input type="hidden" id="max_collection_showed" name="max_collection_showed" value="20">
+			<input type="hidden" id="total_collections" name="total_collections" value="">
+			<input type="hidden" id="last_index" name="last_index" value="0">
 
 			<div class="home home-sections">
 				<section class="highlights how col-md-8">
@@ -101,34 +105,32 @@ if (isset($_GET['info_messages'])) {
 
 				<?php $destaques = new WP_Query( array( 'category_name' => 'destaques' )  ); ?>
 
-					<?php if ( $destaques->have_posts() ) : ?>
+				<?php if ( $destaques->have_posts() ) : ?>
 
-				<section class="articles col-md-4">
-					<h2 class="section-title">Destaques</h2>
+					<section class="articles col-md-4">
+						<h2 class="section-title">Destaques</h2>
 
+						<?php while ( $destaques->have_posts() ) : $destaques->the_post();  ?>
+							<article>
+								<div class="entry-thumb">
+									<a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail(); ?></a>
+								</div>
+
+								<header class="entry-header">
+									
+									<h3 class="entry-title"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></h3></a>
+									
+									<div class="entry-meta">
+										<?php echo acervos_time_ago(get_post_time('G', true)); ?>				
+									</div><!-- .entry-meta -->
+								
+								</header><!-- .entry-header -->
+
+							</article>
+						
+						<?php endwhile; ?>
 				
-
-					<?php while ( $destaques->have_posts() ) : $destaques->the_post();  ?>
-						<article>
-							<div class="entry-thumb">
-								<a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail(); ?></a>
-							</div>
-
-							<header class="entry-header">
-								
-								<h3 class="entry-title"><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></h3></a>
-								
-								<div class="entry-meta">
-									<?php echo acervos_time_ago(get_post_time('G', true)); ?>				
-								</div><!-- .entry-meta -->
-							
-							</header><!-- .entry-header -->
-
-						</article>
-					
-					<?php endwhile; ?>
-			
-				</section>
+					</section>
 
 				<?php endif; ?>
 
@@ -146,115 +148,23 @@ if (isset($_GET['info_messages'])) {
 
 				<div class="clearfix"></div>
 
-				<section class="collections">
-					
-					<h3 class="section-title">Colleções em destaque</h3>
-					
-					<?php 
 
-					// $api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection&filter[s]=afro&filter[orderby]=rand&filter[order]=DESC';
-
-					$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection&filter[s]=a&filter[orderby]=rand&filter[order]=DESC';
-
-					$api_response = wp_remote_get( $api_request );
-					$api_data = json_decode( wp_remote_retrieve_body( $api_response ), true );
-				
-					?>
-
-					<div class="collections-slide">
-						<?php foreach ($api_data as $id => $post) :  ?>
-							<?php //var_dump($post['featured_image']); ?>
-
-							<article class="hentry">
-
-								<div class="temp-image" style="padding-bottom: 83.25%;"></div>
-								
-								<div class="final-content">
-									
-									<a href="<?php echo $post['link']; ?>" target="_blank">
-										
-										<?php if( !empty($post['featured_image']['source']) ) : ?>
-											<div class="entry-thumb">
-										
-												<div class="thumb-icon"><i class="fa fa-link"></i></div>
-												<img class="thumb" src="<?php echo $post['featured_image']['source']; ?>">
-
-											</div>
-											
-											<div class="collection__darkener"></div>
-											<div class="collection__gradient"></div>
-											<div class="thumb-icon"><i class="fa fa-link"></i></div>
-										<?php endif; ?>
-										
-										<div class="post-content no-thumb">
-											<header class="entry-header">
-												<h3 class="entry-title"><?php echo $post['title']; ?></h3>
-												
-												<div class="entry-meta">
-													<?php echo acervos_time_ago(strtotime($post['date'])); ?>	
-												</div><!-- .entry-meta -->
-												<!-- <div class="entry-content">
-													<?php// echo $post['content'];  ?>
-												</div> -->
-											</header><!-- .entry-header -->
-										</div>
-									</a>
-								</div>								
-							</article>
-						<?php endforeach; ?>
-					</div>
-					
-					<!-- http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection -->
-				</section>
+				<?php // coleções em destaque ?>
+				<?php include_once( 'views/home/collections-highlights.php'); ?>
+						
 				<div class="clearfix"></div>
+
+				<!-- vídeos das coleções -->
+				<?php include_once( 'views/home/videos.php'); ?>
+		
+				<div class="clearfix"></div>
+
+				<!-- vídeos das coleções -->
+				<?php include_once( 'views/home/images.php'); ?>
 				
-				<section class="videos">
-					<h3 class="section-title">Vídeos</h3>
-					
-					<?php 
-
-					$api_request    = 'http://afro.culturadigital.br/wp-json/posts/?type=socialdb_collection&filter[s]=afro&filter[orderby]=date&filter[order]=DESC';
-					$api_response = wp_remote_get( $api_request );
-					$api_data = json_decode( wp_remote_retrieve_body( $api_response ), true );
-				
-					?>
-
-					<div class="collections-videos row">
-						<?php foreach ($api_data as $id => $post) :  ?>
-							<?php //var_dump($post['featured_image']); ?>
-
-							<article class="hentry col-md-3">						
-								<?php if( !empty($post['featured_image']['source']) ) : ?>
-									<div class="entry-thumb">
-										<a href="<?php echo $post['link']; ?>" target="_blank">
-
-											<div class="thumb-icon"><i class="fa fa-link"></i></div>
-										
-											<img src="<?php echo $post['featured_image']['source']; ?>">
-										</a>
-									</div>
-								<?php endif; ?>
-
-								<div class="post-content no-thumb">
-									<header class="entry-header">
-										<h3 class="entry-title"><a href="<?php echo $post['link']; ?>" target='_blank'><?php echo $post['title']; ?></h3></a>
-										
-										<div class="entry-meta">
-											<?php echo acervos_time_ago(strtotime($post['date'])); ?>	
-										</div><!-- .entry-meta -->
-										<div class="entry-content">
-											<?php// echo $post['content'];  ?>
-										</div>
-									</header><!-- .entry-header -->
-								</div>
-							</article>
-						<?php endforeach; ?>		
-
-				</section>
-				<section class="images"></section>
 			</div>
 
-			<?php if ( have_posts() ) : ?>
+			<?php if ( !have_posts() ) : ?>
 
 				<?php /* Start the Loop */ ?>
 				<?php $c = 0; ?>
@@ -285,5 +195,6 @@ if (isset($_GET['info_messages'])) {
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-<?php get_sidebar(); ?>
+</body>
+<!-- <?php get_sidebar(); ?> -->
 <?php get_footer(); ?>
